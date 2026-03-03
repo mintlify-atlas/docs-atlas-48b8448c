@@ -1,0 +1,84 @@
+{
+  "projectType": "saas",
+  "projectName": "LoFi Engine",
+  "projectDescription": "Generate procedural LoFi music with customizable ambient sounds and effects, offline and locally.",
+  "theme": "almond",
+  "primaryColor": "#9B7EBD",
+  "lightColor": "#D4C4E0",
+  "darkColor": "#6B5B8E",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "installation",
+              "quickstart"
+            ]
+          },
+          {
+            "group": "Features",
+            "pages": [
+              "features/music-engine",
+              "features/ambient-effects",
+              "features/auto-dj",
+              "features/customization",
+              "features/keyboard-shortcuts",
+              "features/internationalization"
+            ]
+          },
+          {
+            "group": "Using LoFi Engine",
+            "pages": [
+              "guides/interface",
+              "guides/settings",
+              "guides/tips-and-tricks"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Technical",
+        "groups": [
+          {
+            "group": "Development",
+            "pages": [
+              "technical/architecture",
+              "technical/music-generation",
+              "technical/development-setup",
+              "technical/contributing"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Procedural LoFi music generation using Tone.js",
+    "Customizable ambient effects (rain, thunder, campfire, jungle)",
+    "Multiple atmosphere tracks (city, beach, wind, office, etc.)",
+    "Auto DJ system with 4 immersion modes",
+    "10 carefully crafted background artworks",
+    "Complete keyboard shortcut support",
+    "Multi-language support (8+ languages)",
+    "Offline-first design",
+    "Cross-platform desktop app (Linux, Mac, Windows)"
+  ],
+  "publicApiSurface": [
+    "Piano synthesizer with sampler",
+    "Drum kit: Kick, Snare, Hi-Hat",
+    "Chord progression generator",
+    "Rain effect with animation",
+    "Thunder effect",
+    "Campfire effect",
+    "Jungle effect",
+    "Atmosphere tracks: City, Beach, Wind, Office, Night, Train, Underwater, Seagulls",
+    "Auto DJ modes: Music, Atmosphere, World, Manual",
+    "Volume controls for music and effects",
+    "Background theme selector",
+    "Keyboard shortcut system"
+  ]
+}
