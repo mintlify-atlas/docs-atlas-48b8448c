@@ -1,80 +1,226 @@
 ---
-title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+title: Quick start
+description: Get started with LoFi Engine in minutes. Generate your first procedural LoFi track and customize your listening experience.
 ---
 
-## Get started in three steps
+# Quick start
 
-Get your documentation site running locally and make your first customization.
+This guide will get you from installation to generating your first LoFi track in just a few minutes.
 
-### Step 1: Set up your local environment
+<Info>
+If you haven't installed LoFi Engine yet, see the [installation guide](/installation) first.
+</Info>
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+## Your first track
 
-### Step 2: Deploy your changes
+<Steps>
+  <Step title="Launch LoFi Engine">
+    Open the application:
+    - **Linux**: Find it in your application menu or run `lofi-engine`
+    - **macOS**: Open from Applications folder
+    - **Windows**: Launch from Start Menu or Desktop shortcut
+    - **Web**: Visit [lofi-engine.vercel.app](https://lofi-engine.vercel.app/)
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+    You'll see the main interface with a beautiful background artwork and the play button.
+  </Step>
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+  <Step title="Start playback">
+    Click the large play button in the center, or press the **Space** key.
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
+    <Tip>
+    The play button is your main control. Press Space at any time to play or pause.
+    </Tip>
 
-### Step 3: Go live
+    LoFi Engine will immediately start generating a unique LoFi track using procedural generation powered by Tone.js. Every time you play, the experience is different.
+  </Step>
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+  <Step title="Explore the interface">
+    The main interface consists of:
+
+    - **Top bar**: Language selector and settings
+    - **Track list** (left side): Ambient sound controls
+    - **Controls** (right side): Immersion modes and effects
+    - **Play button** (center): Main playback control
+
+    <Note>
+    Press **ESC** at any time to open the info box with all available keyboard shortcuts and app information.
+    </Note>
+  </Step>
+
+  <Step title="Choose an Immersion mode">
+    The Immersion system (Auto DJ) manages your soundscape automatically. Try different modes:
+
+    - **Music**: Pure LoFi beats and chords without effects
+    - **Atmosphere**: Adds weather and nature sounds
+    - **World**: Includes city textures and environmental sounds
+    - **Manual**: Full control to customize everything yourself
+
+    Click the mode buttons in the Controls panel to switch between them.
+  </Step>
+</Steps>
+
+## Adding ambient sounds
+
+Enhance your track with ambient sounds:
+
+<Steps>
+  <Step title="Browse ambient tracks">
+    Look at the Track List panel on the left side of the screen. You'll find various ambient sound options:
+
+    - Nature sounds (birds, rain, waves)
+    - Weather effects (wind, thunder)
+    - Environmental sounds (city noise, cafe ambience)
+  </Step>
+
+  <Step title="Toggle tracks">
+    Click on any ambient track to enable or disable it. Active tracks will be highlighted.
+
+    <Tip>
+    Use keyboard shortcuts to toggle tracks without clicking. Press ESC to view all shortcuts.
+    </Tip>
+  </Step>
+
+  <Step title="Adjust the mix">
+    Switch to **Manual** mode in the Immersion settings for full control over which ambient tracks are active.
+  </Step>
+</Steps>
+
+## Customizing the look
+
+Personalize your LoFi studio with different visual themes:
+
+<Steps>
+  <Step title="Access background settings">
+    Click on the settings icon in the top bar to access customization options.
+  </Step>
+
+  <Step title="Choose your artwork">
+    Browse through carefully crafted artworks from talented artists. Select one that matches your mood or study session vibe.
+
+    <Note>
+    Long study sessions become more enjoyable with the right visual atmosphere.
+    </Note>
+  </Step>
+
+  <Step title="Use keyboard shortcuts">
+    Use keyboard shortcuts to quickly cycle through backgrounds without interrupting your workflow.
+  </Step>
+</Steps>
+
+## Keyboard shortcuts
+
+LoFi Engine is designed for keyboard-first workflow. Every action has a shortcut:
+
+<CardGroup cols={2}>
+  <Card title="Playback control" icon="play">
+    **Space**: Play/Pause
+  </Card>
+  <Card title="Info box" icon="circle-info">
+    **ESC**: Show/hide shortcuts and app info
+  </Card>
+  <Card title="Track controls" icon="music">
+    Keyboard shortcuts for all ambient tracks
+  </Card>
+  <Card title="Effects controls" icon="wand-magic-sparkles">
+    Keyboard shortcuts for all effects and modes
+  </Card>
+</CardGroup>
+
+<Tip>
+**Pro tip**: Press **ESC** to open the info box and memorize the keyboard shortcuts. This will dramatically improve your workflow and allow you to control everything without touching the mouse.
+</Tip>
+
+## Understanding Immersion modes
+
+The Immersion system offers four distinct experiences:
+
+### Music mode
+Focuses purely on the procedurally generated LoFi beat and chords. No atmospheric effects, just clean music. Perfect for focused work.
+
+### Atmosphere mode
+Adds core weather and nature effects to the music for a fuller, more immersive sound. Great for studying or relaxing.
+
+### World mode
+Incorporates specific environmental textures like city sounds, wind, and more detailed ambient layers. Creates deep immersion for creative work.
+
+### Manual mode
+Gives you complete control. Mix and match any combination of music, effects, and ambient tracks. Be the artist and create your unique soundscape.
+
+<Info>
+You can switch between modes at any time while playing. Experiment to find what works best for your current activity.
+</Info>
+
+## Working offline
+
+One of LoFi Engine's key features is complete offline functionality:
+
+- No internet connection required after installation
+- Your listening experience is fully private
+- All audio generation happens locally using Tone.js
+- No data is collected or transmitted
+
+<Note>
+The web version requires an internet connection, but the desktop app works entirely offline.
+</Note>
+
+## Multilingual support
+
+LoFi Engine speaks your language. Switch languages from the top bar:
+
+- English
+- Français (French)
+- Español (Spanish)
+- 日本語 (Japanese)
+- 한국어 (Korean)
+- Bahasa Indonesia (Indonesian)
+- Русский (Russian)
+- And more coming soon
+
+## Tips for the best experience
+
+<CardGroup cols={2}>
+  <Card title="Use quality audio" icon="headphones">
+    LoFi music shines with good headphones or speakers
+  </Card>
+  <Card title="Experiment with modes" icon="flask">
+    Try different Immersion modes for different activities
+  </Card>
+  <Card title="Learn the shortcuts" icon="keyboard">
+    Master keyboard shortcuts for seamless control
+  </Card>
+  <Card title="Create your atmosphere" icon="sparkles">
+    Mix ambient sounds to match your perfect study environment
+  </Card>
+</CardGroup>
 
 ## Next steps
 
-Now that you have your docs running, explore these key features:
+Now that you've generated your first track, explore more:
 
 <CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
+  <Card title="Keyboard shortcuts" icon="keyboard" href="/features/keyboard-shortcuts">
+    Master all available shortcuts for maximum productivity
+  </Card>
+  <Card title="Customization guide" icon="palette" href="/features/customization">
+    Deep dive into all customization options
+  </Card>
+  <Card title="Auto DJ modes" icon="sliders" href="/features/auto-dj">
+    Learn how to use Auto DJ modes effectively
+  </Card>
+  <Card title="Interface guide" icon="window" href="/guides/interface">
+    Understand the complete interface
+  </Card>
 </CardGroup>
 
-<Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
-</Note>
+## Getting help
+
+If you encounter any issues or have questions:
+
+- Press **ESC** in the app for built-in help
+- Check the [tips and tricks guide](/guides/tips-and-tricks)
+- Visit the [GitHub issues page](https://github.com/meel-hd/lofi-engine/issues)
+- Read the [Contributing Guide](https://github.com/meel-hd/lofi-engine/blob/main/CONTRIBUTING.md)
+
+<Tip>
+LoFi Engine is actively seeking user feedback to improve the procedural generation algorithms. Your input helps make the app better for everyone.
+</Tip>

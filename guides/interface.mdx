@@ -1,0 +1,166 @@
+---
+title: User Interface Overview
+description: Complete guide to the LoFi Engine interface, layout, and controls
+---
+
+LoFi Engine features a minimalist, immersive interface designed to help you focus on creating the perfect ambient atmosphere. This guide walks you through each component of the user interface.
+
+## Main Layout
+
+The application is organized into three main sections:
+
+<Steps>
+  <Step title="Track List (Left)">
+    Browse and select from 9 ambient tracks including wind, waves, night ambience, seagulls, office sounds, city ambience, server sounds, train, and underwater white noise.
+  </Step>
+  
+  <Step title="Central Play Controls (Bottom Center)">
+    Main playback controls featuring the play/pause button, chord progression display, and audio visualizer.
+  </Step>
+  
+  <Step title="Environmental Controls (Bottom Right)">
+    Quick access buttons for rain, thunder, jungle sounds, campfire, and settings.
+  </Step>
+</Steps>
+
+## Top Bar
+
+The top bar provides window management controls:
+
+- **Mac Systems**: Traffic light controls (close, minimize, maximize) on the left
+- **Windows/Linux**: Standard window controls on the right
+- **Drag Handle**: Center grip icon for moving the window
+
+<Note>
+  The top bar is only visible in the desktop application. The web version displays a full-screen interface.
+</Note>
+
+## Play Controls
+
+### Main Play Button
+
+The circular play button at the bottom center is your primary control:
+
+<Accordion title="Play Button States">
+  - **Loading**: Spinning icon while audio samples are loading
+  - **Initialize Audio**: Click to initialize the audio engine (first time only)
+  - **Play**: Triangle icon - click to start playback
+  - **Pause**: Pause icon - click to stop playback
+</Accordion>
+
+### Chord Progression Display
+
+Below the play button, you'll see the current musical key and chord progression:
+
+- **Key**: The root note (e.g., C, D, F#)
+- **Chord Degrees**: Eight chord positions displayed as Roman numerals
+- **Active Chord**: Highlighted with a glowing border
+
+<Tip>
+  The chord progression updates automatically based on your Auto DJ mode. Watch the active chord move through the progression as the music plays.
+</Tip>
+
+### Refresh Button
+
+The small circular refresh button below the play button generates a new chord progression instantly, creating a fresh musical variation.
+
+### Audio Visualizer
+
+The waveform visualizer appears in the bottom-left corner when music is playing, providing real-time visual feedback of the audio output.
+
+## Track List Panel
+
+The left panel displays 9 ambient tracks in a vertical carousel:
+
+**Navigation Methods:**
+- Click directly on any track to activate it
+- Use **Up/Down arrows** to scroll through tracks
+- Use **number keys 1-9** to toggle specific tracks
+- **Mouse wheel** to navigate (with scroll throttling)
+
+**Track Features:**
+- Each track loops continuously when active
+- Multiple tracks can play simultaneously
+- Active tracks are visually highlighted
+- Click again to deactivate a playing track
+
+<Note>
+  On mobile devices, the track list automatically hides when settings are open to save screen space.
+</Note>
+
+## Environmental Controls
+
+The control bar at the bottom right provides instant access to atmospheric effects:
+
+### Effect Buttons
+
+<Accordion title="Available Effects">
+  - **Rain**: Ambient rainfall sounds
+  - **Thunder**: Distant thunder rumbles
+  - **Jungle**: Tropical nature ambience
+  - **Campfire**: Crackling fire sounds
+</Accordion>
+
+Each effect button:
+- Toggles on/off with a single click
+- Can be layered with other effects
+- Has independent volume control in settings
+- Responds to keyboard shortcuts (A, S, D, F)
+
+### Settings Button
+
+The gear icon at the right end of the control bar opens the settings panel with options for:
+- Volume controls for all audio layers
+- Auto DJ mode selection
+- Background image customization
+- Language preferences
+
+## Keyboard Shortcuts
+
+The interface is fully keyboard-accessible for efficient workflow:
+
+**Playback:**
+- `Space` - Play/Pause main track
+- `K` - Stop all ambient tracks
+
+**Navigation:**
+- `↑/↓` - Scroll through ambient tracks
+- `←/→` - Change background image
+- `1-9` - Toggle specific ambient tracks
+
+**Quick Actions:**
+- `J` - Open/close settings
+- `A/S/D/F` - Toggle rain/thunder/jungle/campfire
+- `Esc` - Close dialogs
+- `Ctrl+R` - Restart application
+
+<Tip>
+  Press `J` to quickly access settings without reaching for your mouse.
+</Tip>
+
+## Context Menu
+
+Right-click anywhere in the interface to access additional options and shortcuts. The context menu adapts based on where you click.
+
+## Tooltips
+
+Hover over any control to see helpful tooltips explaining its function. This is especially useful when learning the interface for the first time.
+
+## Responsive Design
+
+LoFi Engine adapts to different screen sizes:
+
+**Desktop** (> 600px):
+- Three-column layout with full track list
+- Large play button and controls
+- Side-by-side panels
+
+**Mobile** (≤ 600px):
+- Stacked layout for better touch accessibility
+- Larger touch targets
+- Auto-hiding track list when settings are open
+- Scaled controls for smaller screens
+
+<Warning>
+  Some keyboard shortcuts may not work on mobile devices or tablets. Use the touch interface for full functionality.
+</Warning>

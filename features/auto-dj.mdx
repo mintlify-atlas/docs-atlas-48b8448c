@@ -1,0 +1,261 @@
+---
+title: Auto DJ System
+description: Four immersion modes that automatically control ambient effects and soundscapes for optimal focus
+---
+
+The Auto DJ system intelligently manages your audio environment by automatically controlling ambient effects and background tracks based on your chosen immersion mode.
+
+## Immersion Modes
+
+Choose from four distinct modes that define your listening experience:
+
+<CardGroup cols={2}>
+  <Card title="Music" icon="music">
+    Pure procedural music with no ambient effects. Perfect for focused work.
+  </Card>
+  <Card title="Atmosphere" icon="cloud">
+    Adds core weather and nature effects for enhanced immersion.
+  </Card>
+  <Card title="World" icon="globe">
+    Full immersion with all effects and ambient tracks enabled.
+  </Card>
+  <Card title="Manual" icon="hand">
+    Complete user control - Auto DJ makes no automatic changes.
+  </Card>
+</CardGroup>
+
+## Mode Details
+
+<Tabs>
+  <Tab title="Music Mode">
+    **Just the beat and chords. No atmosphere or world effects.**
+    
+    Ideal for:
+    - Deep focus work
+    - When you want minimal distraction
+    - Pure musical background
+    - Programming or writing
+    
+    What's active:
+    - ✅ Procedural music engine
+    - ✅ Piano, drums, chords
+    - ❌ Rain, thunder, campfire, jungle
+    - ❌ Ambient tracks
+    
+    <Note>
+    Music mode provides the cleanest audio experience with just the core LoFi beat.
+    </Note>
+  </Tab>
+  
+  <Tab title="Atmosphere Mode">
+    **Adds the core weather and nature effects**
+    
+    Ideal for:
+    - Studying or reading
+    - Creative work
+    - Relaxation
+    - Background ambience
+    
+    What's active:
+    - ✅ Procedural music engine
+    - ✅ Rain and thunder effects
+    - ✅ Core nature sounds
+    - ❌ Ambient tracks (optional)
+    
+    <Tip>
+    Atmosphere mode strikes the perfect balance between music and environmental immersion.
+    </Tip>
+  </Tab>
+  
+  <Tab title="World Mode">
+    **Adds the specific textures like city, wind, etc.**
+    
+    Ideal for:
+    - Maximum immersion
+    - Long work sessions
+    - Environmental escapism
+    - Creative inspiration
+    
+    What's active:
+    - ✅ Everything from Atmosphere mode
+    - ✅ All ambient effects
+    - ✅ Ambient tracks (city, train, waves, etc.)
+    - ✅ Additional environmental layers
+    
+    World mode creates the richest soundscape with multiple overlapping textures.
+  </Tab>
+  
+  <Tab title="Manual Mode">
+    **No automatic changes. Full user control.**
+    
+    Ideal for:
+    - Custom soundscape creation
+    - Precise control over every element
+    - Experimenting with combinations
+    - Advanced users
+    
+    Behavior:
+    - ⚙️ Auto DJ makes no automatic changes
+    - ⚙️ All effects remain in their current state
+    - ⚙️ User controls everything via keyboard/UI
+    - ⚙️ Perfect for creating custom mixes
+    
+    <Note>
+    Manual mode gives you complete control but requires more active management.
+    </Note>
+  </Tab>
+</Tabs>
+
+## Switching Modes
+
+Change immersion modes in the Settings panel:
+
+<Steps>
+  <Step title="Open Settings">
+    Press `J` to open the settings panel
+  </Step>
+  
+  <Step title="Find Immersion Section">
+    Look for the "Immersion" section with four mode buttons
+  </Step>
+  
+  <Step title="Select Mode">
+    Click any mode button to activate it:
+    - Music
+    - Atmosphere
+    - World
+    - Manual
+  </Step>
+  
+  <Step title="Auto-Apply">
+    The mode activates immediately and adjusts all effects accordingly
+  </Step>
+</Steps>
+
+## Visual Feedback
+
+Mode buttons show clear active states:
+
+| State | Appearance | Meaning |
+|-------|------------|----------|
+| **Inactive** | Transparent background, thin border | Mode is not active |
+| **Active** | White background, black text, bold | Currently selected mode |
+| **Hover** | Slightly brighter background | Button is interactive |
+
+## Persistent Settings
+
+Your mode selection is automatically saved:
+
+<Accordion title="How It Works">
+  - Selected mode is stored in `localStorage`
+  - Persists across app restarts
+  - No account or cloud sync required
+  - Instant restore on launch
+</Accordion>
+
+## Technical Implementation
+
+The Auto DJ system uses custom events to coordinate changes:
+
+```typescript
+window.dispatchEvent(
+  new CustomEvent("auto-dj-mode-changed", { 
+    detail: { mode: "ATMOSPHERE" } 
+  })
+);
+```
+
+Components listen for mode changes and adjust their behavior accordingly.
+
+## Ambient Tracks
+
+World mode includes access to 9 ambient background tracks:
+
+<AccordionGroup>
+  <Accordion title="Track 1: Urban Seagulls">
+    City atmosphere with distant seagull calls
+  </Accordion>
+  
+  <Accordion title="Track 2: Underwater">
+    Submerged white noise and bubbling sounds
+  </Accordion>
+  
+  <Accordion title="Track 3: Night Ambience">
+    Peaceful nighttime environmental sounds
+  </Accordion>
+  
+  <Accordion title="Track 4: Small Waves">
+    Gentle ocean waves lapping on sand
+  </Accordion>
+  
+  <Accordion title="Track 5: Office Ambience">
+    Subtle office sounds for workspace immersion
+  </Accordion>
+  
+  <Accordion title="Track 6: City Ambience">
+    Urban environment with traffic and life
+  </Accordion>
+  
+  <Accordion title="Track 7: Old Server">
+    Computer fan and hard drive sounds
+  </Accordion>
+  
+  <Accordion title="Track 8: Train to Munich">
+    Rhythmic train travel ambience
+  </Accordion>
+  
+  <Accordion title="Track 9: Wind">
+    Gentle to strong wind sounds
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+Ambient tracks can be controlled individually using number keys 1-9. See [Keyboard Shortcuts](/features/keyboard-shortcuts) for details.
+</Note>
+
+## Mode Comparison
+
+| Feature | Music | Atmosphere | World | Manual |
+|---------|-------|------------|-------|--------|
+| Procedural Music | ✅ | ✅ | ✅ | ⚙️ User controlled |
+| Rain/Thunder | ❌ | ✅ | ✅ | ⚙️ User controlled |
+| Campfire/Jungle | ❌ | ✅ | ✅ | ⚙️ User controlled |
+| Ambient Tracks | ❌ | ❌ | ✅ | ⚙️ User controlled |
+| Auto Control | ✅ | ✅ | ✅ | ❌ |
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Start Simple" icon="play">
+    Begin with Music mode and gradually add more immersion as needed
+  </Card>
+  <Card title="Match Your Task" icon="bullseye">
+    Use Music for focus, World for creative work
+  </Card>
+  <Card title="Adjust Volume First" icon="volume">
+    Set comfortable volume levels before choosing a mode
+  </Card>
+  <Card title="Experiment" icon="flask">
+    Try all modes to find what works best for you
+  </Card>
+</CardGroup>
+
+<Tip>
+Many users find Atmosphere mode provides the perfect balance - enough immersion to stay engaged without becoming distracting.
+</Tip>
+
+## Keyboard Shortcuts
+
+While Auto DJ manages effects automatically, you can always override:
+
+- Press `A`, `S`, `D`, `F` to toggle individual effects
+- Press `1-9` to control ambient tracks
+- Press `K` to stop all ambient sounds
+
+Manual controls work in all modes except Manual mode (where they're the only control method).
+
+## Related Features
+
+- [Ambient Effects](/features/ambient-effects) - Details on rain, thunder, campfire, jungle
+- [Keyboard Shortcuts](/features/keyboard-shortcuts) - Complete shortcut reference
+- [Customization](/features/customization) - Visual and audio customization options

@@ -1,0 +1,156 @@
+---
+title: Procedural Music Engine
+description: Real-time LoFi music generation powered by Tone.js with dynamic chord progressions and layered instrumentation
+---
+
+LoFi Engine generates unique LoFi music in real-time using procedural algorithms. Every session creates original compositions that never repeat, giving you an endless stream of fresh background music.
+
+## How It Works
+
+The music engine consists of three core components that work together to create authentic LoFi soundscapes:
+
+<CardGroup cols={3}>
+  <Card title="Piano" icon="music">
+    Melodic foundation using sampled piano notes across 6 octaves (A, C, D#, F#)
+  </Card>
+  <Card title="Drums" icon="drum">
+    Rhythmic backbone with kick, snare, and hi-hat patterns
+  </Card>
+  <Card title="Chords" icon="guitar">
+    Harmonic structure with procedurally generated chord progressions
+  </Card>
+</CardGroup>
+
+## Tone.js Integration
+
+The engine is built on [Tone.js](https://tonejs.github.io/), a powerful Web Audio framework that handles:
+
+- **Sample Playback**: High-quality piano and drum samples
+- **Signal Processing**: Low-pass filters (1000Hz) for that classic LoFi warmth
+- **Stereo Effects**: Stereo widening for spatial depth
+- **Master Output**: Professional audio routing and mixing
+
+```typescript
+// Piano signal chain
+const lpf = new Tone.Filter(1000, "lowpass");
+const sw = new Tone.StereoWidener(0.5);
+sampler.chain(lpf, sw, Tone.Master);
+```
+
+## Chord Progression System
+
+<Tabs>
+  <Tab title="Generation">
+    Chord progressions are generated procedurally using weighted intervals:
+    
+    - Random starting chord from a curated chord library
+    - Each chord knows which chords can follow it naturally
+    - Progressions maintain musical coherence across transitions
+    - Configurable length for variety and structure
+  </Tab>
+  
+  <Tab title="Music Theory">
+    The engine uses 12 musical keys (C, C#, D, D#, E, F, F#, G, G#, A, A#, B) and applies:
+    
+    - Major scale intervals for harmonic relationships
+    - Weighted chord transitions for natural progressions
+    - Degree-based chord construction for tonal stability
+  </Tab>
+  
+  <Tab title="Customization">
+    While the core engine generates music automatically, the Auto DJ system provides four immersion modes that control how ambient layers interact with the generated music.
+    
+    See [Auto DJ](/features/auto-dj) for details.
+  </Tab>
+</Tabs>
+
+## Instrumentation
+
+### Piano Samples
+
+The piano uses **24 high-quality samples** covering:
+- 4 notes: A, C, D#, F# (carefully selected for LoFi aesthetics)
+- 6 octaves: 1-6 (spanning bass to treble ranges)
+- Multiple velocities for dynamic expression
+
+<Note>
+The limited note selection is intentional - it creates the characteristic LoFi sound by constraining the harmonic palette.
+</Note>
+
+### Drum Kit
+
+<Accordion title="Drum Components">
+  <AccordionGroup>
+    <Accordion title="Kick Drum">
+      - Bass frequency foundation
+      - Volume: -3dB (mixed for balance)
+      - Sample: `assets/engine/DrumSamples/kick.mp3`
+    </Accordion>
+    
+    <Accordion title="Snare">
+      - Mid-range punch and rhythm
+      - Sampled from authentic LoFi kits
+      - Sample: `assets/engine/DrumSamples/snare.mp3`
+    </Accordion>
+    
+    <Accordion title="Hi-Hat">
+      - High-frequency texture and groove
+      - Creates rhythmic subdivisions
+      - Sample: `assets/engine/DrumSamples/hat.mp3`
+    </Accordion>
+  </AccordionGroup>
+</Accordion>
+
+## Audio Processing
+
+The engine applies professional audio processing to achieve the signature LoFi sound:
+
+| Effect | Purpose | Setting |
+|--------|---------|----------|
+| **Low-pass Filter** | Removes harsh high frequencies | 1000Hz cutoff |
+| **Stereo Widener** | Adds spatial depth | 0.5 width |
+| **Volume Control** | Balances drum levels | -3dB on kick |
+
+<Tip>
+The low-pass filter at 1000Hz is crucial for the warm, nostalgic LoFi aesthetic. It removes digital harshness while preserving musical clarity.
+</Tip>
+
+## Playback Control
+
+Control music playback using:
+
+- **Spacebar**: Play/pause the main track
+- **Visual Feedback**: Real-time waveform visualization
+- **Volume Control**: Adjust main track volume independently
+
+For complete keyboard shortcuts, see [Keyboard Shortcuts](/features/keyboard-shortcuts).
+
+## Technical Architecture
+
+The music engine follows a modular design:
+
+```
+Engine
+├── Piano
+│   ├── Sampler (Tone.js)
+│   └── Samples (24 piano notes)
+├── Drums
+│   ├── Kick
+│   ├── Snare
+│   └── Hat
+└── Chords
+    ├── Keys (12 chromatic notes)
+    ├── MajorScale (interval relationships)
+    ├── ChordProgression (generation logic)
+    └── IntervalWeights (transition probabilities)
+```
+
+This architecture ensures:
+- Clean separation of concerns
+- Easy extensibility for new instruments
+- Predictable audio performance
+- Maintainable codebase
+
+<Note>
+All audio samples are preloaded on app start to ensure smooth, glitch-free playback.
+</Note>

@@ -1,0 +1,205 @@
+---
+title: Installation
+description: Install LoFi Engine on Linux, macOS, Windows, or try the web version. No internet connection required after installation.
+---
+
+# Installation
+
+LoFi Engine is available as a native desktop application for Linux, macOS, and Windows. A web version is also available for trying the app without installation.
+
+<Info>
+LoFi Engine version 1.2.0 is the latest release. All desktop versions work completely offline after installation.
+</Info>
+
+## Quick install
+
+<CardGroup cols={2}>
+  <Card title="Desktop app" icon="desktop" href="#desktop-installation">
+    Download for Linux, macOS, or Windows
+  </Card>
+  <Card title="Web version" icon="globe" href="#web-version">
+    Try instantly in your browser
+  </Card>
+</CardGroup>
+
+## Desktop installation
+
+<Steps>
+  <Step title="Download the installer">
+    Visit the [releases page](https://github.com/meel-hd/lofi-engine/releases/tag/app-v1.2.0) and download the installer for your platform:
+
+    ### Linux
+    - **AppImage**: Universal Linux binary (recommended)
+    - **.deb**: For Debian/Ubuntu-based distributions
+    - **.rpm**: For Fedora/RHEL-based distributions
+
+    ### macOS
+    - **.dmg**: macOS disk image
+    - **.app**: macOS application bundle
+
+    <Note>
+    macOS users may need to allow the app in System Preferences > Security & Privacy on first launch.
+    </Note>
+
+    ### Windows
+    - **.msi**: Windows installer (recommended)
+    - **.exe**: Portable executable
+  </Step>
+
+  <Step title="Install the application">
+    ### Linux
+
+    **AppImage**:
+    ```bash
+    chmod +x LofiEngine-*.AppImage
+    ./LofiEngine-*.AppImage
+    ```
+
+    **Debian/Ubuntu (.deb)**:
+    ```bash
+    sudo dpkg -i lofi-engine_*.deb
+    sudo apt-get install -f  # Install dependencies if needed
+    ```
+
+    **Fedora/RHEL (.rpm)**:
+    ```bash
+    sudo rpm -i lofi-engine-*.rpm
+    ```
+
+    ### macOS
+
+    1. Open the downloaded `.dmg` file
+    2. Drag LoFi Engine to your Applications folder
+    3. Launch LoFi Engine from Applications
+
+    <Warning>
+    If macOS blocks the app, go to System Preferences > Security & Privacy and click "Open Anyway".
+    </Warning>
+
+    ### Windows
+
+    1. Run the `.msi` installer
+    2. Follow the installation wizard
+    3. Launch LoFi Engine from the Start Menu or Desktop shortcut
+  </Step>
+
+  <Step title="Launch LoFi Engine">
+    Open the application from:
+    - **Linux**: Application menu or terminal (`lofi-engine`)
+    - **macOS**: Applications folder
+    - **Windows**: Start Menu or Desktop shortcut
+
+    <Tip>
+    Press ESC after launching to view the info box with keyboard shortcuts and app information.
+    </Tip>
+  </Step>
+</Steps>
+
+## Web version
+
+Try LoFi Engine instantly in your browser without installation:
+
+<Card title="LoFi Engine Web" icon="arrow-up-right-from-square" href="https://lofi-engine.vercel.app/">
+  Launch the web version at lofi-engine.vercel.app
+</Card>
+
+<Note>
+The web version provides the same features as the desktop app but requires an internet connection and may have slightly different performance characteristics.
+</Note>
+
+## System requirements
+
+### Minimum requirements
+
+- **OS**: Linux, macOS 10.13+, Windows 10+
+- **RAM**: 2 GB
+- **Disk space**: 100 MB
+- **Audio**: Audio output device
+
+### Recommended requirements
+
+- **OS**: Latest version of your operating system
+- **RAM**: 4 GB or more
+- **Audio**: Quality headphones or speakers for best experience
+
+## Building from source
+
+For developers who want to build LoFi Engine from source:
+
+### Prerequisites
+
+<Steps>
+  <Step title="Install dependencies">
+    - [Node.js](https://nodejs.org/) (v14 or later)
+    - [pnpm](https://pnpm.io/) (v6 or later)
+    - [Rust](https://www.rust-lang.org/) (latest stable version)
+    - [Tauri prerequisites](https://tauri.app/v1/guides/getting-started/prerequisites) for your OS
+  </Step>
+
+  <Step title="Clone the repository">
+    ```bash
+    git clone https://github.com/meel-hd/lofi-engine
+    cd lofi-engine
+    ```
+  </Step>
+
+  <Step title="Install project dependencies">
+    ```bash
+    pnpm install
+    ```
+  </Step>
+
+  <Step title="Run in development mode">
+    ```bash
+    pnpm tauri:d
+    ```
+    This starts both the Vite dev server and Tauri development process.
+  </Step>
+
+  <Step title="Build for production">
+    ```bash
+    pnpm tauri:b
+    ```
+    The built application will be in `src-tauri/target/release`.
+  </Step>
+</Steps>
+
+<Info>
+For detailed development instructions and additional commands, see the [project README](https://github.com/meel-hd/lofi-engine#readme).
+</Info>
+
+## Tech stack
+
+LoFi Engine is built with:
+
+- **Frontend**: Svelte 3, TypeScript, Vite
+- **Desktop framework**: Tauri 2.0
+- **Audio engine**: Tone.js 14
+- **Icons**: Tabler Icons
+- **Package manager**: pnpm
+
+## Troubleshooting
+
+### App won't launch
+
+- **macOS**: Check Security & Privacy settings and allow the app
+- **Linux**: Ensure the AppImage has execute permissions (`chmod +x`)
+- **Windows**: Run as administrator if installation fails
+
+### No audio output
+
+- Check your system audio settings
+- Ensure your audio device is properly connected
+- Try adjusting the volume controls in LoFi Engine
+
+### Performance issues
+
+- Close other resource-intensive applications
+- Try reducing the number of active ambient tracks
+- Consider using the Manual mode in Immersion settings
+
+## Next steps
+
+<Card title="Quick start guide" icon="rocket" href="/quickstart">
+  Learn how to generate your first LoFi track
+</Card>

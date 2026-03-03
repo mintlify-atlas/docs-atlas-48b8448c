@@ -1,0 +1,458 @@
+---
+title: Development Setup
+description: Set up your local development environment for LoFi Engine
+---
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed on your system:
+
+<CardGroup cols={2}>
+  <Card title="Node.js" icon="node-js">
+    **Version 14 or later**
+    
+    [Download Node.js](https://nodejs.org/)
+  </Card>
+  
+  <Card title="pnpm" icon="box">
+    **Version 6 or later**
+    
+    [Install pnpm](https://pnpm.io/)
+  </Card>
+  
+  <Card title="Rust" icon="rust">
+    **Latest stable version**
+    
+    [Install Rust](https://www.rust-lang.org/)
+  </Card>
+  
+  <Card title="Tauri Prerequisites" icon="desktop">
+    **Platform-specific dependencies**
+    
+    [Setup Guide](https://tauri.app/v1/guides/getting-started/prerequisites)
+  </Card>
+</CardGroup>
+
+## Tauri Prerequisites by Platform
+
+<Tabs>
+  <Tab title="Linux">
+    Install the required system dependencies:
+    
+    <CodeGroup>
+    ```bash Debian/Ubuntu
+    sudo apt update
+    sudo apt install libwebkit2gtk-4.0-dev \
+      build-essential \
+      curl \
+      wget \
+      file \
+      libssl-dev \
+      libgtk-3-dev \
+      libayatana-appindicator3-dev \
+      librsvg2-dev
+    ```
+    
+    ```bash Fedora
+    sudo dnf check-update
+    sudo dnf install webkit2gtk4.0-devel \
+      openssl-devel \
+      curl \
+      wget \
+      file \
+      libappindicator-gtk3-devel \
+      librsvg2-devel
+    ```
+    
+    ```bash Arch
+    sudo pacman -Syu
+    sudo pacman -S --needed \
+      webkit2gtk \
+      base-devel \
+      curl \
+      wget \
+      file \
+      openssl \
+      appmenu-gtk-module \
+      gtk3 \
+      libappindicator-gtk3 \
+      librsvg
+    ```
+    </CodeGroup>
+  </Tab>
+  
+  <Tab title="macOS">
+    Install Xcode Command Line Tools:
+    
+    ```bash
+    xcode-select --install
+    ```
+    
+    <Note>
+      Tauri works on macOS 10.15 (Catalina) and later.
+    </Note>
+  </Tab>
+  
+  <Tab title="Windows">
+    Install the following:
+    
+    <Steps>
+      <Step title="Microsoft Visual Studio C++ Build Tools">
+        Download and install [Visual Studio Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
+        
+        Select "Desktop development with C++" workload
+      </Step>
+      
+      <Step title="WebView2">
+        Windows 10 (2004+) and Windows 11 include WebView2 by default.
+        
+        For older versions, download [WebView2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Steps>
+  <Step title="Clone the repository">
+    ```bash
+    git clone https://github.com/meel-hd/lofi-engine
+    cd lofi-engine
+    ```
+  </Step>
+  
+  <Step title="Install dependencies">
+    ```bash
+    pnpm install
+    ```
+    
+    This will install all Node.js dependencies including:
+    - Svelte and related tooling
+    - TypeScript compiler
+    - Vite build tool
+    - Tauri CLI
+    - Tone.js audio library
+    - UI icon packages
+  </Step>
+  
+  <Step title="Verify installation">
+    Check that all tools are properly installed:
+    
+    ```bash
+    node --version   # Should be v14 or later
+    pnpm --version   # Should be v6 or later
+    rustc --version  # Should show stable version
+    ```
+  </Step>
+</Steps>
+
+## Development Workflow
+
+### Running the Development Server
+
+Start the app in development mode with hot reload:
+
+```bash
+pnpm tauri:d
+```
+
+This command:
+1. Starts the Vite dev server on port 1420
+2. Launches the Tauri development window
+3. Enables hot module replacement (HMR)
+4. Shows detailed error messages
+
+<Note>
+  The first run will take longer as Rust dependencies are compiled. Subsequent runs are much faster.
+</Note>
+
+### Development Mode Features
+
+<CardGroup cols={2}>
+  <Card title="Hot Reload" icon="rotate">
+    Changes to Svelte/TypeScript files reload instantly
+  </Card>
+  
+  <Card title="Source Maps" icon="map">
+    Full debugging support with source maps
+  </Card>
+  
+  <Card title="Dev Tools" icon="wrench">
+    Right-click → Inspect to open Chrome DevTools
+  </Card>
+  
+  <Card title="Fast Refresh" icon="bolt">
+    Preserves component state during reload
+  </Card>
+</CardGroup>
+
+## Available Scripts
+
+The project includes several npm scripts defined in `package.json`:
+
+<CodeGroup>
+```json package.json
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "tauri": "tauri",
+    "tauri:d": "tauri dev",
+    "tauri:b": "tauri build"
+  }
+}
+```
+</CodeGroup>
+
+### Script Reference
+
+<Accordion title="pnpm dev">
+  Runs the Vite development server **without** Tauri.
+  
+  Useful for:
+  - Rapid UI development
+  - Testing in browser
+  - Debugging with browser DevTools
+  
+  ```bash
+  pnpm dev
+  ```
+  
+  Visit http://localhost:1420 in your browser.
+</Accordion>
+
+<Accordion title="pnpm build">
+  Builds the frontend assets **without** creating a Tauri app.
+  
+  ```bash
+  pnpm build
+  ```
+  
+  Output: `dist/` directory with optimized HTML, CSS, JS
+</Accordion>
+
+<Accordion title="pnpm preview">
+  Previews the production build locally.
+  
+  ```bash
+  pnpm build
+  pnpm preview
+  ```
+  
+  Useful for testing the production build before creating the desktop app.
+</Accordion>
+
+<Accordion title="pnpm check">
+  Runs Svelte type checking with TypeScript.
+  
+  ```bash
+  pnpm check
+  ```
+  
+  Use this to catch type errors before building.
+</Accordion>
+
+<Accordion title="pnpm tauri:d">
+  **Main development command** - runs the full Tauri app with hot reload.
+  
+  ```bash
+  pnpm tauri:d
+  ```
+</Accordion>
+
+<Accordion title="pnpm tauri:b">
+  Builds the production desktop application.
+  
+  ```bash
+  pnpm tauri:b
+  ```
+  
+  Output: `src-tauri/target/release/` directory
+</Accordion>
+
+## Building for Production
+
+Create a production build of the desktop application:
+
+```bash
+pnpm tauri:b
+```
+
+<Steps>
+  <Step title="Frontend build">
+    Vite compiles and optimizes the frontend:
+    - TypeScript → JavaScript
+    - Svelte components → optimized JS
+    - Assets bundled and minified
+    - Tree-shaking removes unused code
+  </Step>
+  
+  <Step title="Rust compilation">
+    Cargo compiles the Tauri backend:
+    - Release mode optimizations
+    - Platform-specific binary
+    - Minimal runtime dependencies
+  </Step>
+  
+  <Step title="Packaging">
+    Creates platform-specific installers:
+    - **Linux**: AppImage, .deb, .rpm
+    - **macOS**: .dmg, .app bundle
+    - **Windows**: .msi, .exe
+  </Step>
+</Steps>
+
+### Build Output
+
+The compiled application is located at:
+
+```
+src-tauri/target/release/
+├── lofi-engine              # Binary (Linux/macOS)
+├── lofi-engine.exe          # Binary (Windows)
+└── bundle/
+    ├── appimage/            # Linux AppImage
+    ├── deb/                 # Debian package
+    ├── dmg/                 # macOS disk image
+    └── msi/                 # Windows installer
+```
+
+<Warning>
+  Production builds take significantly longer than development builds (5-15 minutes depending on your hardware).
+</Warning>
+
+## Project Configuration
+
+### Vite Configuration
+
+The `vite.config.ts` file contains build and dev server settings:
+
+```typescript vite.config.ts
+import { defineConfig } from "vite";
+import { svelte } from "@sveltejs/vite-plugin-svelte";
+import sveltePreprocess from "svelte-preprocess";
+
+export default defineConfig(async () => ({
+  base: "./",
+  plugins: [
+    svelte({
+      preprocess: [
+        sveltePreprocess({
+          typescript: true,
+        }),
+      ],
+    }),
+  ],
+  clearScreen: false,  // Don't obscure Rust errors
+  server: {
+    port: 1420,        // Fixed port for Tauri
+    strictPort: true,  // Fail if port unavailable
+  },
+  envPrefix: ["VITE_", "TAURI_"],
+  build: {
+    target: process.env.TAURI_PLATFORM == "windows" ? "chrome105" : "safari13",
+    minify: !process.env.TAURI_DEBUG ? "esbuild" : false,
+    sourcemap: !!process.env.TAURI_DEBUG,
+  },
+}));
+```
+
+<Accordion title="Key configuration options">
+  - **base: "./"**: Use relative paths for assets
+  - **port: 1420**: Tauri's default port
+  - **strictPort: true**: Fail if port is in use
+  - **clearScreen: false**: Keep Rust errors visible
+  - **Dynamic target**: Chrome 105 (Windows) or Safari 13 (macOS/Linux)
+</Accordion>
+
+### TypeScript Configuration
+
+The project uses TypeScript with Svelte-specific settings. See `tsconfig.json` for details.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Port 1420 already in use">
+    Kill the process using the port:
+    
+    ```bash
+    # Find the process
+    lsof -i :1420
+    
+    # Kill it
+    kill -9 <PID>
+    ```
+    
+    Or change the port in `vite.config.ts`.
+  </Accordion>
+  
+  <Accordion title="Rust compilation errors">
+    Update Rust to the latest stable version:
+    
+    ```bash
+    rustup update stable
+    ```
+    
+    Clear the build cache:
+    
+    ```bash
+    cd src-tauri
+    cargo clean
+    cd ..
+    pnpm tauri:d
+    ```
+  </Accordion>
+  
+  <Accordion title="pnpm install fails">
+    Clear the pnpm cache and reinstall:
+    
+    ```bash
+    pnpm store prune
+    rm -rf node_modules
+    pnpm install
+    ```
+  </Accordion>
+  
+  <Accordion title="WebView2 error (Windows)">
+    Install the WebView2 Runtime:
+    
+    [Download WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)
+  </Accordion>
+  
+  <Accordion title="Audio not working">
+    Ensure Tone.js samples are loaded:
+    - Check `public/assets/engine/` directory
+    - Verify sample paths in `src/lib/engine/*/Samples.ts`
+    - Check browser console for 404 errors
+  </Accordion>
+</AccordionGroup>
+
+## IDE Setup
+
+### VS Code (Recommended)
+
+Install the following extensions:
+
+- **Svelte for VS Code** - Syntax highlighting and IntelliSense
+- **Tauri** - Tauri-specific features
+- **rust-analyzer** - Rust language support
+- **ESLint** - JavaScript/TypeScript linting
+
+### WebStorm
+
+Enable the Svelte plugin in Settings → Plugins.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Contributing Guidelines" icon="code-pull-request" href="/technical/contributing">
+    Learn how to contribute to the project
+  </Card>
+  
+  <Card title="System Architecture" icon="diagram-project" href="/technical/architecture">
+    Understand the codebase structure
+  </Card>
+</CardGroup>

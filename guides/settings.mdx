@@ -1,0 +1,255 @@
+---
+title: Settings & Configuration
+description: Configure volume levels, Auto DJ modes, backgrounds, and preferences in LoFi Engine
+---
+
+LoFi Engine offers extensive customization options to create your perfect ambient environment. Access settings by clicking the gear icon in the bottom-right control bar or pressing `J`.
+
+## Accessing Settings
+
+Open the settings panel using any of these methods:
+
+<Steps>
+  <Step title="Click the Settings Icon">
+    Click the gear icon at the right end of the environmental controls bar.
+  </Step>
+  
+  <Step title="Press the J Key">
+    Press `J` on your keyboard for instant access.
+  </Step>
+  
+  <Step title="Close Settings">
+    Click outside the settings panel, press `J` again, or press `Esc`.
+  </Step>
+</Steps>
+
+The settings panel appears as a scrollable overlay on the right side of your screen.
+
+## Volume Controls
+
+Each audio layer has an independent volume slider, allowing you to mix the perfect soundscape.
+
+### Available Volume Controls
+
+<Accordion title="Main Track Volume">
+  Controls the volume of the generated LoFi music (chords, melody, and drums). This is your primary musical layer.
+  
+  - Range: 1-100%
+  - Stored in localStorage
+  - Updates in real-time without interruption
+</Accordion>
+
+<Accordion title="Rain Volume">
+  Adjusts the ambient rainfall effect volume independently from other sounds.
+  
+  - Layered with other atmospheric effects
+  - Can be muted without stopping other sounds
+</Accordion>
+
+<Accordion title="Thunder Volume">
+  Controls the intensity of thunder sounds that accompany the rain effect.
+  
+  - Works independently of rain volume
+  - Creates dramatic atmosphere at higher volumes
+</Accordion>
+
+<Accordion title="Jungle Volume">
+  Sets the volume for tropical nature ambience including birds and insects.
+  
+  - Rich environmental soundscape
+  - Combines well with other nature effects
+</Accordion>
+
+<Accordion title="Campfire Volume">
+  Adjusts the crackling campfire sound layer.
+  
+  - Warm, cozy atmospheric effect
+  - Perfect for evening focus sessions
+</Accordion>
+
+### Volume Tips
+
+<Tip>
+  Start with all volumes at 50-70% and adjust from there. Too many effects at 100% can become overwhelming.
+</Tip>
+
+<Note>
+  All volume settings are automatically saved to your browser's localStorage and persist between sessions.
+</Note>
+
+## Auto DJ Modes
+
+Auto DJ intelligently manages your music and atmospheric effects, automatically transitioning between different musical keys and soundscapes.
+
+### Mode Selection
+
+Choose from four Auto DJ modes, each offering different levels of automation:
+
+<Accordion title="MUSIC Mode (Default)">
+  **Best for:** Continuous background music with minimal changes
+  
+  **Behavior:**
+  - Automatically changes musical key and chord progression every 16-48 bars
+  - Randomizes melody density, kick, snare, and hi-hat patterns
+  - Smooth crossfade transitions with low-pass filter effects
+  - No automatic effect or ambient track changes
+  - User maintains full control over environmental sounds
+  
+  **Transition Frequency:** Every 16-48 bars (random)
+</Accordion>
+
+<Accordion title="ATMOSPHERE Mode">
+  **Best for:** Dynamic soundscapes with automatic environmental changes
+  
+  **Behavior:**
+  - All MUSIC mode features included
+  - 30% chance to toggle an environmental effect during each transition
+  - Randomly enables/disables rain, thunder, jungle, or campfire
+  - Creates evolving atmospheric layers
+  - Ambient tracks remain under user control
+  
+  **Ideal for:** Long work sessions where you want variety without manual adjustments
+</Accordion>
+
+<Accordion title="WORLD Mode">
+  **Best for:** Completely hands-off, fully automated experience
+  
+  **Behavior:**
+  - All MUSIC and ATMOSPHERE mode features included
+  - 30% chance to toggle environmental effects
+  - 20% chance to toggle ambient tracks (1-9) during transitions
+  - Maximum variety and unpredictability
+  - Creates unique soundscapes with every transition
+  
+  **Ideal for:** Discovery and exploration of different sound combinations
+</Accordion>
+
+<Accordion title="MANUAL Mode">
+  **Best for:** Complete user control without automatic changes
+  
+  **Behavior:**
+  - No automatic key or chord progression changes
+  - No automatic effect toggling
+  - No automatic ambient track changes
+  - Music plays current progression continuously
+  - All changes must be triggered manually
+  
+  **Ideal for:** When you've found your perfect sound and want it to stay consistent
+</Accordion>
+
+### Auto DJ Technical Details
+
+<Note>
+  Auto DJ transitions include a sophisticated crossfade effect:
+  1. Low-pass filter sweeps down to 300Hz over 2 seconds (muffling effect)
+  2. Changes occur during the muffled state
+  3. Filter sweeps back up to 1200Hz over 2 seconds (clarity returns)
+  
+  This creates seamless, professional-sounding transitions between musical keys.
+</Note>
+
+<Tip>
+  Try ATMOSPHERE mode for your first session. It provides the right balance between automation and control.
+</Tip>
+
+## Background Customization
+
+Personalize your visual experience with background image controls.
+
+### Default Backgrounds
+
+LoFi Engine includes 10 built-in background images:
+
+- Navigate using `←/→` arrow keys
+- Click the left/right arrow buttons in settings
+- Backgrounds range from serene landscapes to urban scenes
+
+### Custom Backgrounds
+
+<Steps>
+  <Step title="Upload Your Image">
+    Click the `+` button in the background section of settings. Select one or multiple image files (JPG, PNG, etc.).
+  </Step>
+  
+  <Step title="Image Processing">
+    Images are converted to data URLs and stored in your browser's IndexedDB. This allows them to persist between sessions without server uploads.
+  </Step>
+  
+  <Step title="Navigate Your Collection">
+    Custom backgrounds are added to the rotation and can be accessed with arrow keys or navigation buttons.
+  </Step>
+  
+  <Step title="Delete Custom Backgrounds">
+    Hover over a custom background preview and click the red trash icon to remove it.
+  </Step>
+</Steps>
+
+<Warning>
+  Large images (> 5MB) may impact performance. Consider compressing images before uploading for the best experience.
+</Warning>
+
+<Tip>
+  Custom backgrounds are stored locally in your browser. They won't sync across devices unless you use the same browser profile.
+</Tip>
+
+### Background Navigation
+
+- **Keyboard**: `←` and `→` arrow keys
+- **Settings Panel**: Click arrow buttons on either side of the preview
+- **Preview**: Shows current background with filename
+
+## Language Settings
+
+LoFi Engine supports multiple languages for the interface:
+
+### Available Languages
+
+- English (en)
+- 中文 - Chinese (zh)
+- हिन्दी - Hindi (hi)
+- Français - French (fr)
+- Nederlands - Dutch (nl)
+- 日本語 - Japanese (ja)
+- Русский - Russian (ru)
+
+<Steps>
+  <Step title="Select Language">
+    Click any language button in the Language section of settings.
+  </Step>
+  
+  <Step title="Instant Update">
+    The interface updates immediately to the selected language.
+  </Step>
+  
+  <Step title="Persistence">
+    Your language choice is saved and will be remembered for future sessions.
+  </Step>
+</Steps>
+
+<Note>
+  Language changes affect all UI text including tooltips, shortcuts, and setting labels. The musical elements remain the same.
+</Note>
+
+## Settings Persistence
+
+All your settings are automatically saved:
+
+**Stored in localStorage:**
+- All volume levels
+- Auto DJ mode selection
+- Background ID and type (default or custom)
+- Language preference
+
+**Stored in IndexedDB:**
+- Custom background images (full data)
+
+**Not Stored:**
+- Current playback state (play/pause)
+- Currently active ambient tracks
+- Active environmental effects
+
+This means your preferences persist between sessions, but the app always starts in a neutral state (nothing playing) when you launch it.
+
+<Tip>
+  If you want to reset all settings to defaults, use your browser's developer tools to clear localStorage and IndexedDB for the LoFi Engine domain.
+</Tip>

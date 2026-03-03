@@ -1,0 +1,242 @@
+---
+title: System Architecture
+description: Overview of LoFi Engine's architecture, tech stack, and project structure
+---
+
+## Overview
+
+LoFi Engine is a cross-platform desktop application that generates procedural LoFi music in real-time. The application combines modern web technologies with native desktop capabilities to deliver a rich, customizable audio experience.
+
+## Tech Stack
+
+The project is built with the following technologies:
+
+<CardGroup cols={2}>
+  <Card title="Frontend" icon="browser">
+    - **Svelte 3.54** - Reactive UI framework
+    - **TypeScript 4.9** - Type-safe JavaScript
+    - **Vite 4.2** - Fast build tool and dev server
+  </Card>
+  
+  <Card title="Desktop" icon="desktop">
+    - **Tauri 2.6** - Lightweight native shell
+    - **Rust** - Native backend runtime
+  </Card>
+  
+  <Card title="Audio" icon="waveform">
+    - **Tone.js 14.7** - Web Audio framework
+    - **Web Audio API** - Low-level audio processing
+  </Card>
+  
+  <Card title="Package Manager" icon="box">
+    - **pnpm** - Fast, efficient package management
+  </Card>
+</CardGroup>
+
+## Project Structure
+
+The codebase is organized into clear, functional modules:
+
+```
+lofi-engine/
+├── src/
+│   ├── lib/
+│   │   ├── engine/              # Music generation core
+│   │   │   ├── Chords/          # Chord progression system
+│   │   │   ├── Drums/           # Drum pattern generation
+│   │   │   └── Piano/           # Piano sample playback
+│   │   ├── components/          # UI components
+│   │   │   ├── Controls/        # Audio effect controls
+│   │   │   ├── InfoBox/         # Help and shortcuts
+│   │   │   ├── TopBar/          # Window controls
+│   │   │   ├── TrackList/       # Ambient track list
+│   │   │   └── Visualizer/      # Audio visualizer
+│   │   └── locales/             # Internationalization
+│   └── App.svelte               # Root component
+├── src-tauri/                   # Tauri native code
+├── public/                      # Static assets
+└── vite.config.ts              # Build configuration
+```
+
+### Key Directories
+
+<AccordionGroup>
+  <Accordion title="src/lib/engine/">
+    Contains the procedural music generation system:
+    - **Chords/** - Musical theory and chord progression logic
+    - **Drums/** - Drum pattern synthesis (Kick, Hat, Snare, Noise)
+    - **Piano/** - Piano sample management and playback
+  </Accordion>
+  
+  <Accordion title="src/lib/components/">
+    Svelte UI components organized by feature:
+    - **Controls/** - Effect controls (Rain, Thunder, CampFire, Jungle)
+    - **Settings/** - Volume, background, Auto DJ configuration
+    - **TopBar/** - Platform-specific window controls
+    - **TrackList/** - Ambient track selection UI
+  </Accordion>
+  
+  <Accordion title="src-tauri/">
+    Native desktop functionality:
+    - Window management
+    - File system access
+    - System tray integration
+    - Native menus
+  </Accordion>
+</AccordionGroup>
+
+## Architecture Layers
+
+### Audio Engine Layer
+
+The audio engine (`src/lib/engine/`) is the core of LoFi Engine. It generates music procedurally using Tone.js:
+
+<Steps>
+  <Step title="Chord Progression Generation">
+    Generate harmonic structure using music theory rules
+    
+    See: `src/lib/engine/Chords/ChordProgression.ts:5`
+  </Step>
+  
+  <Step title="Instrument Synthesis">
+    Create drum patterns and piano voicings
+    
+    See: `src/lib/engine/Drums/`, `src/lib/engine/Piano/`
+  </Step>
+  
+  <Step title="Audio Processing">
+    Apply filters, effects, and stereo widening
+    
+    See: `src/lib/engine/Piano/Piano.ts:4`
+  </Step>
+  
+  <Step title="Playback">
+    Schedule and play audio samples in real-time
+  </Step>
+</Steps>
+
+### UI Layer
+
+The UI layer is built with Svelte components that provide:
+- Real-time audio controls
+- Visual feedback (waveform visualization)
+- Ambient sound mixing
+- Customizable backgrounds
+- Keyboard shortcut support
+
+### Native Layer
+
+Tauri provides the native desktop functionality:
+- Cross-platform window management (Linux, macOS, Windows)
+- Native system integration
+- Offline operation
+- Small bundle size (~10MB)
+
+## Build Configuration
+
+The Vite configuration (`vite.config.ts`) is optimized for Tauri:
+
+```typescript vite.config.ts
+import { defineConfig } from "vite";
+import { svelte } from "@sveltejs/vite-plugin-svelte";
+import sveltePreprocess from "svelte-preprocess";
+
+export default defineConfig(async () => ({
+  base: "./",
+  plugins: [
+    svelte({
+      preprocess: [
+        sveltePreprocess({
+          typescript: true,
+        }),
+      ],
+    }),
+  ],
+  server: {
+    port: 1420,
+    strictPort: true,
+  },
+  build: {
+    target: process.env.TAURI_PLATFORM == "windows" ? "chrome105" : "safari13",
+    minify: !process.env.TAURI_DEBUG ? "esbuild" : false,
+    sourcemap: !!process.env.TAURI_DEBUG,
+  },
+}));
+```
+
+<Note>
+  The fixed port (1420) is required by Tauri for communication between the web frontend and native backend.
+</Note>
+
+## Key Features
+
+### Procedural Generation
+
+Music is generated on-the-fly using music theory principles:
+- Major scale harmonization
+- Weighted chord progressions
+- Dynamic voicing generation
+- Randomized patterns for variety
+
+### Effects Pipeline
+
+Audio effects are implemented using Tone.js nodes:
+
+```typescript
+// Example from Piano.ts
+const lpf = new Tone.Filter(1000, "lowpass");
+const sw = new Tone.StereoWidener(0.5);
+sampler.chain(lpf, sw, Tone.Master);
+```
+
+### Ambient Soundscapes
+
+The **Auto DJ** system automatically manages soundscapes:
+- **Music**: Beat and chords only
+- **Atmosphere**: Music + weather/nature effects
+- **World**: Full immersion with environmental sounds
+- **Manual**: Full user control
+
+## Performance Considerations
+
+<CardGroup cols={2}>
+  <Card title="Small Bundle Size" icon="compress">
+    Tauri apps are ~10MB compared to 100MB+ Electron apps
+  </Card>
+  
+  <Card title="Low CPU Usage" icon="gauge">
+    Efficient audio scheduling with Web Audio API
+  </Card>
+  
+  <Card title="Fast Startup" icon="rocket">
+    Native binary with minimal initialization
+  </Card>
+  
+  <Card title="Offline First" icon="wifi-slash">
+    All audio generation happens client-side
+  </Card>
+</CardGroup>
+
+## Cross-Platform Support
+
+LoFi Engine runs on:
+- **Linux** (AppImage, deb, rpm)
+- **macOS** (dmg, app bundle)
+- **Windows** (msi, exe)
+- **Web** (browser deployment at lofi-engine.vercel.app)
+
+<Note>
+  Mobile support (iOS, Android) is planned for future releases.
+</Note>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Music Generation" icon="music" href="/technical/music-generation">
+    Learn how the procedural music system works
+  </Card>
+  
+  <Card title="Development Setup" icon="code" href="/technical/development-setup">
+    Set up your local development environment
+  </Card>
+</CardGroup>

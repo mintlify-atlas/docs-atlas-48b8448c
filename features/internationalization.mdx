@@ -1,0 +1,348 @@
+---
+title: Multi-Language Support
+description: LoFi Engine supports multiple languages with full interface localization
+---
+
+LoFi Engine is designed for a global audience with comprehensive multi-language support. All UI text, labels, and descriptions are fully localized.
+
+## Supported Languages
+
+LoFi Engine currently supports 7 languages:
+
+<CardGroup cols={3}>
+  <Card title="English" icon="flag-usa">
+    Default language (en)
+  </Card>
+  <Card title="French" icon="flag">
+    Français (fr)
+  </Card>
+  <Card title="Dutch" icon="flag">
+    Nederlands (nl)
+  </Card>
+  <Card title="Russian" icon="flag">
+    Русский (ru)
+  </Card>
+  <Card title="Japanese" icon="flag">
+    日本語 (ja)
+  </Card>
+  <Card title="Chinese" icon="flag">
+    中文 (zh)
+  </Card>
+  <Card title="Hindi" icon="flag">
+    हिन्दी (hi)
+  </Card>
+</CardGroup>
+
+## Changing Language
+
+Switch languages in the Settings panel:
+
+<Steps>
+  <Step title="Open Settings">
+    Press `J` to open the settings panel
+  </Step>
+  
+  <Step title="Find Language Section">
+    Scroll to the "Language" section
+  </Step>
+  
+  <Step title="Select Language">
+    Click your preferred language from the dropdown
+  </Step>
+  
+  <Step title="Instant Update">
+    All text updates immediately - no restart required
+  </Step>
+</Steps>
+
+<Note>
+Language preference is saved locally and persists across app restarts.
+</Note>
+
+## What Gets Translated
+
+All user-facing text is localized:
+
+<Tabs>
+  <Tab title="Interface Elements">
+    - Button labels
+    - Menu items
+    - Section headings
+    - Tooltips
+    - Error messages
+  </Tab>
+  
+  <Tab title="Settings Panel">
+    - "Background" section
+    - "Volume" controls
+    - "Immersion" mode descriptions
+    - "Language" selector
+    - All labels and descriptions
+  </Tab>
+  
+  <Tab title="Info Box">
+    - App title and tagline
+    - Keyboard shortcut descriptions
+    - General, Main Track, Effects, Ambient sections
+    - All action descriptions
+  </Tab>
+  
+  <Tab title="Context Menu">
+    - Play/Pause
+    - Toggle Rain/Thunder/Jungle/Campfire
+    - Reload
+    - About
+  </Tab>
+  
+  <Tab title="Ambient Tracks">
+    - Track quotes and descriptions
+    - Track 1-9 text overlays
+  </Tab>
+</Tabs>
+
+## Translation Structure
+
+Translations follow a hierarchical structure:
+
+```typescript
+{
+  settings: {
+    title: 'Settings',
+    background: { ... },
+    volume: { ... },
+    autodj: {
+      title: 'Immersion',
+      modes: {
+        music: { label: '...', desc: '...' },
+        atmosphere: { label: '...', desc: '...' },
+        world: { label: '...', desc: '...' },
+        manual: { label: '...', desc: '...' }
+      }
+    }
+  },
+  info: { ... },
+  context_menu: { ... },
+  tracks: { ... }
+}
+```
+
+## Translation Examples
+
+<Accordion title="Auto DJ Mode Descriptions">
+  <AccordionGroup>
+    <Accordion title="Music Mode">
+      **English**: "Just the beat and chords. No atmosphere or world effects."
+      
+      **French**: "Juste le rythme et les accords. Aucun effet d'atmosphère ou de monde."
+      
+      **Japanese**: "ビートとコードだけ。雰囲気やワールドエフェクトはありません。"
+    </Accordion>
+    
+    <Accordion title="Atmosphere Mode">
+      **English**: "Adds the core weather and nature effects"
+      
+      **Dutch**: "Voegt de kern weer- en natuureffecten toe"
+      
+      **Russian**: "Добавляет основные погодные и природные эффекты"
+    </Accordion>
+  </AccordionGroup>
+</Accordion>
+
+## Localization Coverage
+
+Comprehensive translation coverage:
+
+| Category | Items Translated | Coverage |
+|----------|------------------|----------|
+| Settings | 20+ strings | 100% |
+| Info/Shortcuts | 25+ strings | 100% |
+| Context Menu | 8 strings | 100% |
+| Track Quotes | 9 strings | 100% |
+| Tooltips | 15+ strings | 100% |
+
+<Tip>
+All 7 languages have complete translations for every UI element in the app.
+</Tip>
+
+## Technical Implementation
+
+### Store System
+
+LoFi Engine uses a reactive translation store:
+
+```typescript
+import { t } from '../../locales/store';
+
+// In components:
+{$t.settings.background.title}
+{$t.info.shortcuts.general.esc}
+```
+
+### Language Files
+
+Each language has its own file:
+
+- `src/lib/locales/en.ts` - English (base)
+- `src/lib/locales/fr.ts` - French
+- `src/lib/locales/nl.ts` - Dutch
+- `src/lib/locales/ru.ts` - Russian
+- `src/lib/locales/ja.ts` - Japanese
+- `src/lib/locales/zh.ts` - Chinese
+- `src/lib/locales/hi.ts` - Hindi
+
+### Type Safety
+
+Translations are fully typed:
+
+```typescript
+export type Translations = typeof en;
+```
+
+This ensures:
+- All languages have the same keys
+- TypeScript catches missing translations
+- Auto-completion in code
+
+## Adding New Languages
+
+<Note>
+Current version does not support user-added languages. Language support is built-in at compile time.
+</Note>
+
+To request a new language:
+1. Check if it's already in development
+2. File an issue/feature request
+3. Consider contributing a translation file
+
+## Right-to-Left (RTL) Support
+
+<Warning>
+LoFi Engine does not currently support RTL languages like Arabic or Hebrew. All supported languages use left-to-right text direction.
+</Warning>
+
+## Persistent Language Selection
+
+Language preference is stored locally:
+
+<Accordion title="Storage Details">
+  - **Location**: Browser localStorage
+  - **Key**: `locale` or `language`
+  - **Format**: Two-letter language code (e.g., "en", "ja", "fr")
+  - **Persistence**: Survives app restarts
+  - **Default**: Falls back to English if invalid/missing
+</Accordion>
+
+## Language Detection
+
+The app can detect your browser's preferred language:
+
+<Steps>
+  <Step title="First Launch">
+    App checks `navigator.language` or `navigator.userLanguage`
+  </Step>
+  
+  <Step title="Match Supported Languages">
+    If browser language is supported, app uses it
+  </Step>
+  
+  <Step title="Fallback to English">
+    If browser language isn't supported, defaults to English
+  </Step>
+  
+  <Step title="Remember Choice">
+    Once you manually select a language, that preference is saved
+  </Step>
+</Steps>
+
+## Translation Quality
+
+All translations are:
+
+<CardGroup cols={2}>
+  <Card title="Contextual" icon="message">
+    Translations consider UI context and space constraints
+  </Card>
+  <Card title="Natural" icon="language">
+    Phrasing sounds native, not machine-translated
+  </Card>
+  <Card title="Consistent" icon="check">
+    Same terms translated consistently throughout
+  </Card>
+  <Card title="Up-to-date" icon="clock">
+    Maintained alongside English source
+  </Card>
+</CardGroup>
+
+## Special Considerations
+
+<AccordionGroup>
+  <Accordion title="Text Length Variations">
+    Different languages have different text lengths:
+    
+    - German: Often longer (compound words)
+    - Japanese: Usually more compact
+    - English: Medium length baseline
+    
+    UI is designed to accommodate these variations without breaking.
+  </Accordion>
+  
+  <Accordion title="Cultural Adaptations">
+    Some translations adapt for cultural context:
+    
+    - Quotes may be different across languages
+    - Examples use culturally relevant references
+    - Tone matches local communication norms
+  </Accordion>
+  
+  <Accordion title="Keyboard Shortcuts">
+    Keyboard shortcuts remain the same across languages:
+    
+    - `A`, `S`, `D`, `F` for effects (not localized)
+    - Number keys 1-9 for tracks
+    - Arrow keys for navigation
+    
+    Only the **descriptions** of shortcuts are translated.
+  </Accordion>
+</AccordionGroup>
+
+## Reporting Translation Issues
+
+If you find translation errors:
+
+1. **Note the incorrect text**: Screenshot or copy the text
+2. **Identify the language**: Which language has the error?
+3. **Describe the issue**: What's wrong? What should it say?
+4. **Provide context**: Where in the app does this appear?
+
+<Tip>
+Native speakers are invaluable for improving translation quality. Contributions are welcome!
+</Tip>
+
+## Future Language Support
+
+Potential languages for future releases:
+
+- Spanish (es)
+- German (de)
+- Italian (it)
+- Portuguese (pt)
+- Korean (ko)
+- Arabic (ar) - requires RTL support
+
+<Note>
+Language priorities are based on user demand and contributor availability.
+</Note>
+
+## Accessibility
+
+Multi-language support enhances accessibility:
+
+- Users can interact in their preferred language
+- Reduces cognitive load for non-English speakers
+- Makes the app more inclusive globally
+- Screen readers work correctly with localized text
+
+## Related Features
+
+- [Keyboard Shortcuts](/features/keyboard-shortcuts) - Note: Shortcuts are not localized
+- [Customization](/features/customization) - Settings panel where language is changed

@@ -1,0 +1,302 @@
+---
+title: Visual Customization
+description: Personalize your LoFi Engine experience with background artworks and custom images
+---
+
+Make LoFi Engine truly yours with customizable background visuals. Choose from built-in artworks or upload your own images to create the perfect atmosphere.
+
+## Background Artworks
+
+LoFi Engine includes 10 curated background images designed to complement your focus sessions:
+
+<CardGroup cols={2}>
+  <Card title="Built-in Backgrounds" icon="image">
+    10 pre-selected artworks with LoFi aesthetics
+  </Card>
+  <Card title="Custom Uploads" icon="upload">
+    Add unlimited personal images
+  </Card>
+  <Card title="Quick Navigation" icon="arrows-left-right">
+    Switch backgrounds with arrow keys
+  </Card>
+  <Card title="Persistent Storage" icon="database">
+    Custom images saved locally in browser
+  </Card>
+</CardGroup>
+
+## Changing Backgrounds
+
+<Tabs>
+  <Tab title="Keyboard Shortcuts">
+    The fastest way to cycle through backgrounds:
+    
+    - **Right Arrow (→)**: Next background
+    - **Left Arrow (←)**: Previous background
+    
+    <Tip>
+    Keyboard navigation cycles through ALL backgrounds - both built-in and custom uploads.
+    </Tip>
+  </Tab>
+  
+  <Tab title="Settings Panel">
+    Visual control with preview:
+    
+    <Steps>
+      <Step title="Open Settings">
+        Press `J` to open the settings panel
+      </Step>
+      
+      <Step title="Find Background Section">
+        Scroll to the "Background" section
+      </Step>
+      
+      <Step title="Use Arrow Buttons">
+        Click left/right arrow buttons around the preview image
+      </Step>
+      
+      <Step title="See Live Preview">
+        Background changes in real-time as you navigate
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Built-in Backgrounds
+
+The app includes 10 carefully selected backgrounds:
+
+<Accordion title="Background Gallery">
+  All backgrounds are stored in `assets/background/`:
+  
+  - **bg1.jpg** - Background 1
+  - **bg2.jpg** - Background 2
+  - **bg3.jpg** - Background 3
+  - **bg4.jpg** - Background 4
+  - **bg5.jpg** - Background 5
+  - **bg6.jpg** - Background 6
+  - **bg7.jpg** - Background 7
+  - **bg8.jpg** - Background 8
+  - **bg9.jpg** - Background 9
+  - **bg10.jpg** - Background 10
+  
+  <Note>
+  Backgrounds are optimized for performance with appropriate resolution and file size.
+  </Note>
+</Accordion>
+
+## Custom Backgrounds
+
+Upload your own images to create a personalized experience:
+
+### Adding Custom Images
+
+<Steps>
+  <Step title="Open Settings">
+    Press `J` to access the settings panel
+  </Step>
+  
+  <Step title="Click Upload Button">
+    Look for the **+** button in the Background section header
+  </Step>
+  
+  <Step title="Select Images">
+    Choose one or multiple image files from your computer
+  </Step>
+  
+  <Step title="Automatic Processing">
+    Images are processed and added to your background collection
+  </Step>
+  
+  <Step title="Instant Activation">
+    Newly uploaded images become active immediately
+  </Step>
+</Steps>
+
+### Supported Formats
+
+Upload any standard image format:
+
+- **JPEG/JPG** - Best for photographs
+- **PNG** - Supports transparency
+- **WebP** - Modern, efficient format
+- **GIF** - Static images only (no animation)
+
+<Note>
+Images are converted to data URLs and stored locally in your browser. No images are uploaded to any server.
+</Note>
+
+### Multiple Uploads
+
+Upload multiple images at once:
+
+- Select multiple files in the file picker
+- All images process simultaneously
+- Each gets a unique ID for identification
+- All are added to your background collection
+
+## Managing Custom Backgrounds
+
+### Deleting Backgrounds
+
+Remove custom backgrounds you no longer want:
+
+<Steps>
+  <Step title="Navigate to Custom Background">
+    Use arrow keys or settings to view the custom image
+  </Step>
+  
+  <Step title="Hover Preview">
+    In the settings panel, hover over the preview image
+  </Step>
+  
+  <Step title="Click Delete Button">
+    A red trash icon appears - click it to delete
+  </Step>
+  
+  <Step title="Auto-Switch">
+    App automatically switches to the next available background
+  </Step>
+</Steps>
+
+<Warning>
+Deleting a background is permanent and cannot be undone. You'll need to re-upload if you want it back.
+</Warning>
+
+### Storage Details
+
+<Accordion title="How Custom Backgrounds Are Stored">
+  - **Location**: Browser localStorage (IndexedDB via localDB)
+  - **Format**: JSON with base64 encoded images
+  - **Limit**: Browser-dependent (typically 5-10MB)
+  - **Persistence**: Survives app restarts
+  - **Privacy**: All data stays local, never uploaded
+  
+  Stored data structure:
+  ```json
+  {
+    "id": "custom_1234567890_abc123",
+    "name": "my-photo.jpg",
+    "dataUrl": "data:image/jpeg;base64,...",
+    "size": 245678,
+    "type": "image/jpeg"
+  }
+  ```
+</Accordion>
+
+## Background Cycling
+
+Backgrounds cycle through both built-in and custom images:
+
+1. Start with built-in backgrounds (bg1 - bg10)
+2. Continue to custom uploaded images
+3. Loop back to beginning
+
+<Tip>
+The order is: bg1, bg2, ..., bg10, custom1, custom2, ..., then back to bg1.
+</Tip>
+
+## Visual Feedback
+
+### Settings Preview
+
+The settings panel shows:
+
+- **Current background** - Full preview image
+- **Navigation arrows** - Left and right buttons
+- **Delete button** - Only for custom backgrounds (appears on hover)
+- **Upload indicator** - Shows when processing images
+
+### Active State
+
+Know which background is active:
+
+- Preview in settings matches main background
+- Background changes instantly when navigating
+- No lag or loading screens
+
+## Technical Implementation
+
+### Background Application
+
+Backgrounds are applied via CSS:
+
+```typescript
+const bg = document.getElementById("bg");
+bg.style.backgroundImage = `url('${imageUrl}')`;
+```
+
+### Storage Strategy
+
+<CardGroup cols={2}>
+  <Card title="Built-in Backgrounds">
+    Stored as static files in `assets/background/`
+  </Card>
+  <Card title="Custom Backgrounds">
+    Stored as data URLs in browser localStorage
+  </Card>
+</CardGroup>
+
+### Event System
+
+Background changes trigger custom events:
+
+```typescript
+window.dispatchEvent(new CustomEvent("backgroundsUpdated"));
+window.dispatchEvent(new CustomEvent("customBackgroundSelected", {
+  detail: { id: "custom_123" }
+}));
+```
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Image Size">
+    For best performance:
+    - Use images appropriate for your screen resolution
+    - 1920x1080 or 2560x1440 are good targets
+    - Avoid extremely large files (>5MB)
+  </Accordion>
+  
+  <Accordion title="Image Content">
+    Choose images that:
+    - Don't distract from work
+    - Have appropriate contrast for UI elements
+    - Match your mood or task
+    - Are aesthetically pleasing but subtle
+  </Accordion>
+  
+  <Accordion title="Organization">
+    Manage your collection:
+    - Delete backgrounds you rarely use
+    - Keep collection under 20-30 images
+    - Name files descriptively before uploading
+  </Accordion>
+</AccordionGroup>
+
+## Keyboard Shortcuts
+
+Full background control via keyboard:
+
+| Shortcut | Action |
+|----------|--------|
+| **→** | Next background |
+| **←** | Previous background |
+| **J** | Open settings (for upload/delete) |
+
+<Note>
+Arrow keys work from anywhere in the app, even when settings are closed.
+</Note>
+
+## Responsive Design
+
+Backgrounds adapt to all screen sizes:
+
+- **Desktop**: Full background coverage
+- **Mobile**: Optimized cropping and scaling
+- **Tablet**: Balanced display
+- **CSS**: `background-size: cover` and `background-position: center`
+
+## Related Features
+
+- [Keyboard Shortcuts](/features/keyboard-shortcuts) - Complete shortcut reference
+- [Auto DJ](/features/auto-dj) - Automatic audio environment control

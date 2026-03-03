@@ -1,0 +1,241 @@
+---
+title: Ambient Effects
+description: Layer rain, thunder, campfire, and jungle sounds to create immersive LoFi atmospheres
+---
+
+Amplify your focus with layered ambient effects. LoFi Engine includes four environmental sound effects that blend seamlessly with the procedural music engine.
+
+## Available Effects
+
+<CardGroup cols={2}>
+  <Card title="Rain" icon="cloud-rain">
+    Gentle rainfall creates a calming backdrop perfect for concentration and relaxation.
+  </Card>
+  <Card title="Thunder" icon="cloud-bolt">
+    Distant storm sounds add dramatic atmosphere without being overwhelming.
+  </Card>
+  <Card title="Campfire" icon="fire">
+    Crackling flames provide warm, cozy ambience for evening sessions.
+  </Card>
+  <Card title="Jungle" icon="tree">
+    Nature sounds with birds and wildlife for tropical immersion.
+  </Card>
+</CardGroup>
+
+## Quick Access
+
+All effects are available via keyboard shortcuts for instant control:
+
+<Tabs>
+  <Tab title="Rain">
+    **Key**: `A`
+    
+    Toggle gentle rainfall on/off. The rain effect loops continuously and includes:
+    - Realistic rain droplet sounds
+    - Optional animated rain overlay on screen
+    - Adjustable volume via settings
+    
+    <Tip>
+    Rain pairs exceptionally well with the Atmosphere immersion mode for maximum focus.
+    </Tip>
+  </Tab>
+  
+  <Tab title="Thunder">
+    **Key**: `S`
+    
+    Toggle distant thunderstorm sounds. Features:
+    - Periodic thunder rumbles
+    - Storm ambience without heavy rain
+    - Perfect for dramatic atmosphere
+    
+    <Note>
+    Thunder works independently from rain - you can enable thunder without rain or vice versa.
+    </Note>
+  </Tab>
+  
+  <Tab title="Campfire">
+    **Key**: `F`
+    
+    Toggle crackling campfire sounds:
+    - Wood popping and crackling
+    - Warm, cozy atmosphere
+    - Ideal for evening work sessions
+  </Tab>
+  
+  <Tab title="Jungle">
+    **Key**: `D`
+    
+    Toggle tropical nature sounds:
+    - Bird calls and wildlife
+    - Dense forest ambience
+    - Transports you to lush environments
+  </Tab>
+</Tabs>
+
+## Visual Feedback
+
+Effect buttons provide clear visual states:
+
+| State | Appearance | Meaning |
+|-------|------------|----------|
+| **Inactive** | Transparent background, white icon | Effect is off |
+| **Active** | White background, black icon | Effect is playing |
+
+## Volume Control
+
+Adjust individual effect volumes in the Settings panel:
+
+<Steps>
+  <Step title="Open Settings">
+    Press `J` to open the settings panel
+  </Step>
+  
+  <Step title="Find Volume Section">
+    Scroll to the Volume controls
+  </Step>
+  
+  <Step title="Adjust Sliders">
+    Each effect has its own volume slider:
+    - Rain
+    - Thunder
+    - Jungle
+    - Campfire
+  </Step>
+  
+  <Step title="Balance Your Mix">
+    Set volumes to create your perfect atmosphere
+  </Step>
+</Steps>
+
+<Note>
+Volume changes apply in real-time - no need to stop and restart effects.
+</Note>
+
+## Technical Details
+
+### Audio Implementation
+
+Each effect uses the HTML5 Audio API:
+
+```typescript
+const rain = new Audio("assets/engine/effects/rain.mp3");
+rain.loop = true;
+rain.volume = volume; // 0.0 to 1.0
+```
+
+### Effect Files
+
+All ambient effects are stored as MP3 files:
+
+- `assets/engine/effects/rain.mp3`
+- `assets/engine/effects/thunder.mp3`
+- `assets/engine/effects/fire.mp3`
+- `assets/engine/effects/jungle.mp3`
+
+<Accordion title="Audio Specifications">
+  - **Format**: MP3
+  - **Loop**: Seamless (no audible seams)
+  - **Quality**: High bitrate for clarity
+  - **Duration**: Varies by effect (optimized for looping)
+</Accordion>
+
+## Auto DJ Integration
+
+Effects automatically enable/disable based on your immersion mode:
+
+<CardGroup cols={3}>
+  <Card title="Music Mode">
+    All effects disabled by default
+  </Card>
+  <Card title="Atmosphere Mode">
+    Core weather effects enabled (rain, thunder)
+  </Card>
+  <Card title="World Mode">
+    All effects enabled for full immersion
+  </Card>
+</CardGroup>
+
+See [Auto DJ](/features/auto-dj) for complete details on immersion modes.
+
+## Rain Animation
+
+When rain is active, an optional animated overlay can appear on screen:
+
+<Tabs>
+  <Tab title="Visual Effect">
+    - Animated raindrops falling across the screen
+    - Particle-based rendering
+    - Lightweight performance impact
+    - Enhances immersion without distraction
+  </Tab>
+  
+  <Tab title="Performance">
+    The rain animation is optimized:
+    - Uses CSS animations where possible
+    - GPU-accelerated rendering
+    - Minimal CPU usage
+    - No impact on audio playback
+  </Tab>
+</Tabs>
+
+## Layering Effects
+
+Create complex soundscapes by combining multiple effects:
+
+### Recommended Combinations
+
+<AccordionGroup>
+  <Accordion title="Cozy Study Session">
+    - Rain: Medium volume
+    - Thunder: Low volume
+    - Campfire: Medium-high volume
+    - Music: Main track at comfortable level
+  </Accordion>
+  
+  <Accordion title="Tropical Paradise">
+    - Jungle: High volume
+    - Rain: Low volume (light drizzle)
+    - Music: Upbeat tempo
+    - No thunder or campfire
+  </Accordion>
+  
+  <Accordion title="Stormy Night">
+    - Rain: High volume
+    - Thunder: Medium-high volume
+    - Campfire: Low volume (indoor warmth)
+    - Music: Mellow, slow tempo
+  </Accordion>
+  
+  <Accordion title="Pure Nature">
+    - Jungle: Medium volume
+    - Rain: Medium volume
+    - Music: Very low or off
+    - Focus on natural sounds
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+Experiment with different combinations and volumes to find your perfect focus environment. Save your favorites by noting the settings.
+</Tip>
+
+## Context Menu
+
+Right-click anywhere to access quick effect toggles:
+
+- Toggle Rain
+- Toggle Thunder
+- Toggle Jungle
+- Toggle Campfire
+
+This provides an alternative to keyboard shortcuts when working with a mouse.
+
+## Accessibility
+
+All effects are fully accessible:
+
+- Keyboard shortcuts work from anywhere in the app
+- Visual button states are high contrast
+- Screen readers announce effect status
+- No mouse required for full control
+
+For complete keyboard navigation, see [Keyboard Shortcuts](/features/keyboard-shortcuts).

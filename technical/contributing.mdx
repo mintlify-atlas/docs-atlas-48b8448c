@@ -1,0 +1,471 @@
+---
+title: Contributing Guidelines
+description: How to contribute to LoFi Engine - from bug reports to pull requests
+---
+
+## Welcome Contributors!
+
+We welcome contributions from the community! Whether you're fixing bugs, adding features, improving documentation, or helping with translations, your contributions make LoFi Engine better for everyone.
+
+<Note>
+  Before contributing, please read through these guidelines to ensure a smooth collaboration process.
+</Note>
+
+## Ways to Contribute
+
+<CardGroup cols={2}>
+  <Card title="Bug Reports" icon="bug">
+    Report issues you encounter while using the app
+  </Card>
+  
+  <Card title="Feature Requests" icon="lightbulb">
+    Suggest new features or improvements
+  </Card>
+  
+  <Card title="Code Contributions" icon="code">
+    Fix bugs or implement new features
+  </Card>
+  
+  <Card title="Documentation" icon="book">
+    Improve or translate documentation
+  </Card>
+  
+  <Card title="Design" icon="palette">
+    Contribute artwork or UI improvements
+  </Card>
+  
+  <Card title="Testing" icon="vial">
+    Test new features and provide feedback
+  </Card>
+</CardGroup>
+
+## Getting Started
+
+Before you start contributing:
+
+<Steps>
+  <Step title="Check the issue tracker">
+    Visit the [issue tracker](https://github.com/meel-hd/lofi-engine/issues) to:
+    - Find issues labeled `good first issue` for beginners
+    - See what's already being worked on
+    - Discuss new ideas before implementing
+  </Step>
+  
+  <Step title="Set up your development environment">
+    Follow the [Development Setup](/technical/development-setup) guide to get LoFi Engine running locally.
+  </Step>
+  
+  <Step title="Understand the architecture">
+    Read the [System Architecture](/technical/architecture) documentation to understand how the project is structured.
+  </Step>
+</Steps>
+
+## Contribution Workflow
+
+Follow this workflow to contribute code changes:
+
+<Steps>
+  <Step title="Fork the repository">
+    Create your own fork of the repository:
+    
+    1. Go to [github.com/meel-hd/lofi-engine](https://github.com/meel-hd/lofi-engine)
+    2. Click the "Fork" button in the top-right
+    3. Clone your fork locally:
+    
+    ```bash
+    git clone https://github.com/YOUR_USERNAME/lofi-engine
+    cd lofi-engine
+    ```
+  </Step>
+  
+  <Step title="Create a new branch">
+    Create a branch for your feature or bugfix:
+    
+    ```bash
+    git checkout -b feature/your-feature-name
+    ```
+    
+    Branch naming conventions:
+    - `feature/` - New features
+    - `fix/` - Bug fixes
+    - `docs/` - Documentation changes
+    - `refactor/` - Code refactoring
+    - `test/` - Adding tests
+    
+    Examples:
+    ```bash
+    git checkout -b feature/add-bass-synth
+    git checkout -b fix/audio-glitch-on-pause
+    git checkout -b docs/improve-setup-guide
+    ```
+  </Step>
+  
+  <Step title="Implement and test your changes">
+    Make your changes and test them thoroughly:
+    
+    ```bash
+    # Run the development server
+    pnpm tauri:d
+    
+    # Run type checking
+    pnpm check
+    ```
+    
+    <Warning>
+      Always test your changes across different platforms if possible (Linux, macOS, Windows).
+    </Warning>
+  </Step>
+  
+  <Step title="Commit your changes">
+    Make clear, descriptive commits:
+    
+    ```bash
+    git add .
+    git commit -m "feat: add bass synthesizer to music engine"
+    ```
+    
+    Commit message format:
+    - `feat:` - New feature
+    - `fix:` - Bug fix
+    - `docs:` - Documentation
+    - `style:` - Formatting changes
+    - `refactor:` - Code restructuring
+    - `test:` - Adding tests
+    - `chore:` - Maintenance tasks
+  </Step>
+  
+  <Step title="Push to your fork">
+    Push your changes to your GitHub fork:
+    
+    ```bash
+    git push origin feature/your-feature-name
+    ```
+  </Step>
+  
+  <Step title="Open a Pull Request">
+    1. Go to your fork on GitHub
+    2. Click "Pull Request" → "New Pull Request"
+    3. Select the `master` branch as the base
+    4. Select your feature branch as the compare
+    5. Fill in the PR template with:
+       - Description of changes
+       - Related issue numbers
+       - Testing performed
+       - Screenshots (if UI changes)
+  </Step>
+</Steps>
+
+## Code Style Guidelines
+
+### TypeScript / JavaScript
+
+<CodeGroup>
+```typescript Good Example
+// Use descriptive variable names
+const chordProgression = ChordProgression.generate(8);
+
+// Add comments for complex logic
+// Normalize intervals to single octave for mode generation
+const mode = intervals.map(n => n >= 12 ? n - 12 : n);
+
+// Use TypeScript types
+interface AudioEffect {
+  type: 'filter' | 'reverb' | 'delay';
+  value: number;
+}
+```
+
+```typescript Bad Example
+// Avoid single-letter variables (except loops)
+const c = CP.gen(8);
+
+// No magic numbers without explanation
+const mode = intervals.map(n => n >= 12 ? n - 12 : n);
+
+// Avoid 'any' type
+function process(data: any) { ... }
+```
+</CodeGroup>
+
+### Svelte Components
+
+```svelte
+<script lang="ts">
+  // Group imports: external first, then internal
+  import * as Tone from 'tone';
+  import Piano from '$lib/engine/Piano/Piano';
+  
+  // Use TypeScript for props
+  export let volume: number = 0.8;
+  export let enabled: boolean = false;
+  
+  // Document complex reactive statements
+  // Recalculate frequency when volume changes
+  $: frequency = volume * 1000;
+</script>
+
+<style>
+  /* Use clear class names */
+  .piano-control {
+    padding: 1rem;
+    background: var(--bg-color);
+  }
+</style>
+```
+
+### Rust (Tauri Backend)
+
+```rust
+// Use idiomatic Rust
+use tauri::command;
+
+#[command]
+fn process_audio(samples: Vec<f32>) -> Result<Vec<f32>, String> {
+    // Add error handling
+    if samples.is_empty() {
+        return Err("No samples provided".to_string());
+    }
+    
+    Ok(samples)
+}
+```
+
+## Pull Request Guidelines
+
+### Before Submitting
+
+<Tabs>
+  <Tab title="Checklist">
+    Ensure your PR meets these criteria:
+    
+    - [ ] Code follows project style guidelines
+    - [ ] All type checks pass (`pnpm check`)
+    - [ ] Changes have been tested locally
+    - [ ] Commit messages are clear and descriptive
+    - [ ] PR description explains what and why
+    - [ ] Related issues are referenced
+    - [ ] No console errors or warnings
+    - [ ] New features include comments/documentation
+  </Tab>
+  
+  <Tab title="Testing">
+    Test your changes thoroughly:
+    
+    **Functional Testing**
+    - Does the feature work as intended?
+    - Are there any edge cases?
+    - Does it work across different screen sizes?
+    
+    **Integration Testing**
+    - Does it work with existing features?
+    - Are there any conflicts?
+    - Does audio playback still work smoothly?
+    
+    **Platform Testing** (if possible)
+    - Test on Linux, macOS, and Windows
+    - Check for platform-specific issues
+  </Tab>
+  
+  <Tab title="Documentation">
+    Update documentation if needed:
+    
+    - Code comments for complex logic
+    - README.md for user-facing changes
+    - CONTRIBUTING.md for process changes
+    - Inline documentation for new APIs
+  </Tab>
+</Tabs>
+
+### PR Template
+
+When opening a PR, include:
+
+```markdown
+## Description
+Brief description of what this PR does.
+
+## Related Issues
+Fixes #123
+Related to #456
+
+## Changes Made
+- Added bass synthesizer to music engine
+- Updated audio processing pipeline
+- Added tests for new synth
+
+## Testing
+- [x] Tested on Linux
+- [x] Tested on macOS
+- [ ] Tested on Windows
+
+## Screenshots
+(If applicable)
+
+## Additional Notes
+Any other context or considerations.
+```
+
+## Music Generation Contributions
+
+Contributing to the procedural music system:
+
+<Accordion title="Chord Progressions">
+  To modify chord progression logic:
+  
+  1. Edit `src/lib/engine/Chords/Chords.ts`
+  2. Update `nextChordIdxs` arrays with valid progressions
+  3. Test that progressions sound musical
+  4. Document music theory reasoning
+  
+  Example:
+  ```typescript
+  const I = new Chord(
+      1,
+      [0,4,7,11,14,17,21],
+      toChordIdxs([2,3,4,5,6,7])  // Allow progression to ii-vii
+  );
+  ```
+</Accordion>
+
+<Accordion title="Audio Effects">
+  To add new audio effects:
+  
+  1. Use Tone.js effect nodes
+  2. Chain effects properly
+  3. Add user controls in UI
+  4. Document effect parameters
+  
+  Example:
+  ```typescript
+  const reverb = new Tone.Reverb(2.0);
+  const delay = new Tone.FeedbackDelay("8n", 0.5);
+  sampler.chain(reverb, delay, Tone.Master);
+  ```
+</Accordion>
+
+<Accordion title="New Instruments">
+  To add new instruments:
+  
+  1. Create new directory in `src/lib/engine/`
+  2. Implement sampler class with effects
+  3. Add samples to `public/assets/engine/`
+  4. Integrate with main audio engine
+  5. Add UI controls
+  
+  See: `src/lib/engine/Piano/Piano.ts:1` for reference
+</Accordion>
+
+## Reporting Bugs
+
+Found a bug? Help us fix it:
+
+<Steps>
+  <Step title="Search existing issues">
+    Check if the bug has already been reported:
+    
+    [LoFi Engine Issues](https://github.com/meel-hd/lofi-engine/issues)
+  </Step>
+  
+  <Step title="Create a new issue">
+    If it's a new bug, create a detailed report:
+    
+    **Include:**
+    - Clear description of the bug
+    - Steps to reproduce
+    - Expected vs actual behavior
+    - Platform (Linux/macOS/Windows)
+    - App version
+    - Screenshots or videos (if applicable)
+    - Console errors (if any)
+  </Step>
+  
+  <Step title="Label appropriately">
+    Use labels to categorize:
+    - `bug` - Something isn't working
+    - `critical` - App crashes or data loss
+    - `audio` - Audio-related issues
+    - `ui` - User interface problems
+    - `performance` - Slow or laggy behavior
+  </Step>
+</Steps>
+
+## Requesting Features
+
+Have an idea for LoFi Engine?
+
+<Steps>
+  <Step title="Check existing requests">
+    Search issues labeled `enhancement` to see if it's already requested.
+  </Step>
+  
+  <Step title="Create a feature request">
+    Open a new issue with:
+    - Clear description of the feature
+    - Use case / problem it solves
+    - Proposed implementation (if you have ideas)
+    - Mockups or examples (if applicable)
+  </Step>
+  
+  <Step title="Discuss with maintainers">
+    Engage in discussion to refine the idea before implementing.
+  </Step>
+</Steps>
+
+## Community Guidelines
+
+<CardGroup cols={2}>
+  <Card title="Be Respectful" icon="handshake">
+    Treat all contributors with respect and kindness
+  </Card>
+  
+  <Card title="Be Patient" icon="clock">
+    Maintainers are volunteers—reviews take time
+  </Card>
+  
+  <Card title="Be Open" icon="comments">
+    Accept feedback gracefully and iterate
+  </Card>
+  
+  <Card title="Be Helpful" icon="hands-helping">
+    Help other contributors when you can
+  </Card>
+</CardGroup>
+
+## Recognition
+
+All contributors are recognized in:
+- GitHub contributors list
+- Release notes for significant contributions
+- The app's "About" section
+
+## Getting Help
+
+Need help contributing?
+
+<CardGroup cols={2}>
+  <Card title="Issue Tracker" icon="github" href="https://github.com/meel-hd/lofi-engine/issues">
+    Ask questions or report problems
+  </Card>
+  
+  <Card title="Development Setup" icon="code" href="/technical/development-setup">
+    Get your environment set up
+  </Card>
+  
+  <Card title="Architecture Guide" icon="diagram-project" href="/technical/architecture">
+    Understand the codebase
+  </Card>
+  
+  <Card title="Music Generation" icon="music" href="/technical/music-generation">
+    Learn about the audio engine
+  </Card>
+</CardGroup>
+
+## License
+
+By contributing to LoFi Engine, you agree that your contributions will be licensed under the [MIT License](https://github.com/meel-hd/lofi-engine/blob/master/LICENSE).
+
+---
+
+<Note>
+  **Thank you for contributing to LoFi Engine!** Your efforts help create a better experience for everyone in the community.
+</Note>
